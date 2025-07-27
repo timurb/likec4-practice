@@ -115,7 +115,7 @@ views {
     view kafka_main extends kafka_all {
         // autoLayout LeftRight 200 100
         // include *
-    
+
         // include kafka_cluster.kafka.*
         // include zkCluster.*
         exclude monitoring, centralLogging
