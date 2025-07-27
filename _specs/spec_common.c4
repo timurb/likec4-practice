@@ -1,0 +1,35 @@
+specification {
+    element system 
+    element service
+
+    element linuxProcess {
+        style {
+            size small
+        }
+    }
+
+    element dataVolume {
+        style {
+            shape storage
+            size xsmall
+        }
+    }
+
+    element configFile {
+        style {
+            size xsmall
+        }
+    }
+
+    element user {
+        style {
+            shape person
+        }
+    }
+
+
+    element linuxComponent
+    deploymentNode vm
+    deploymentNode cluster
+
+}

@@ -1,0 +1,15 @@
+model {
+    user developer "Разработчик системы" {
+        style {
+            color secondary
+        }
+    }
+
+    user administrator "Администратор системы" {
+        style {
+            color secondary
+        }
+    }
+
+    user endUser "Пользователь системы"
+}

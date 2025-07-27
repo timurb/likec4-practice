@@ -1,0 +1,14 @@
+model {
+    system microservice {
+        service consumer {
+            this -> kafka_cluster.kafka_broker
+        }
+
+        service producer {
+            kafka_cluster.kafka_broker -> this
+        }
+
+        this -[metrics]->monitoring.prometheus
+    }
+
+}

@@ -1,0 +1,18 @@
+specification {
+    element cluster {
+        notation "Cluster"
+    }
+    element clusterNode {
+        notation "A node of a cluster"
+        style {
+            multiple true
+        }
+    }
+
+    relationship cluster {
+        head none
+        color muted
+        line dotted
+    }
+
+}

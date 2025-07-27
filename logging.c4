@@ -1,0 +1,55 @@
+model {
+
+    system centralLogging {
+        style {
+            color secondary    
+        }
+
+
+        service collector
+        service storage {
+            style {
+                shape storage
+            }
+        }
+        service ui
+        collector -> storage
+        ui -> storage
+    }
+}
+
+// deployment {
+//     vm vm {
+//         icon tech:linux
+//         instanceOf logrotate
+//         instanceOf logfile
+//         instanceOf shipper
+//     }
+
+//     vm proxy {
+//         instanceOf collector
+//         instanceOf ui
+//     }
+
+//     vm storage1 {
+//         instanceOf storage
+//     }
+//     vm storage2 {
+//         instanceOf storage
+//     }
+
+// }
+
+// views {
+//     view logging of centralLogging {
+//         include *
+//     }
+
+//     view linux of VM {
+//         include *
+//     }
+
+//     deployment view view_logging_41 {        
+//         include *
+//     }
+// }

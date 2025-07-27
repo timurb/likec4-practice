@@ -1,0 +1,29 @@
+specification {
+    element logfile {
+        style {
+            shape queue
+            size xsmall
+            color secondary
+        }
+    }
+
+    element logsShipper {
+        style {
+            size small
+            color secondary
+        }
+    }
+    
+    element logRotate {
+        style {
+            size small
+            color secondary
+        }
+    }
+
+    relationship logs {
+        line dotted
+        head vee
+        color secondary
+    }
+}

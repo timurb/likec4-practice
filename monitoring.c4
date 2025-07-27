@@ -1,0 +1,34 @@
+model {
+    system monitoring {
+        style {
+            color secondary    
+        }
+
+        service prometheus {
+            icon tech:prometheus
+        }
+
+        service grafana {
+            icon tech:grafana
+
+            this -> prometheus
+        }
+    }
+
+    user monitoringUser "Пользователь мониторинга" {
+        style {
+            color secondary
+        }
+    }
+
+    developer -> monitoring.grafana "Смотрит дашборды"
+    administrator -> monitoring.grafana "Смотрит дашборды"
+}
+
+views {
+    view  {
+        include -> monitoring
+        include monitoring
+        include monitoring.*
+    }
+}

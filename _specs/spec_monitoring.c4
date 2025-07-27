@@ -1,0 +1,14 @@
+specification {
+    element metricsExporter {
+        style {
+            size small
+            color secondary
+        }
+    }
+
+    relationship metrics {
+        line dotted
+        head vee
+        color secondary
+    }    
+}

@@ -1,0 +1,24 @@
+model {
+    extend kafka_cluster.zkCluster.zookeeper_node {
+        logsShipper shipperZk {
+            zk_logfile -[logs]-> this
+            this -[logs ]-> centralLogging.collector
+
+            configFile shipper_config 'Shipper config file'
+        }
+
+        // FIXME: add logrotate?        
+    }
+
+    extend kafka_cluster.kafka.kafka_broker {
+        logsShipper shipperKafka {
+            kafka_logfile -[logs]-> this
+            this -[logs ]-> centralLogging.collector
+
+            configFile shipper_config 'Shipper config file'
+        }        
+
+        // FIXME: add logrotate?        
+    }
+
+}

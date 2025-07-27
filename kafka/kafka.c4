@@ -1,0 +1,143 @@
+model {
+    system kafka_cluster {
+
+        cluster zkCluster 'Zookeeper Cluster' {
+
+            clusterNode zookeeper_node 'Zookeeper Node'{
+                style {
+                    shape cylinder
+                }
+
+                linuxProcess zkProcess
+                logfile zk_logfile 'Zookeeper log file'
+                configFile zk_config 'Zookeeper config file'
+
+                zkProcess -> zk_logfile "Пишет логи"
+                zk_config -> zkProcess "Читает конфиг"
+
+            }
+        }
+
+        cluster kafka 'Kafka Cluster' {
+            clusterNode kafka_broker 'Kafka Broker' {
+                style {
+                    shape queue
+                    icon tech:kafka
+                }
+
+                linuxProcess kafkaProcess
+                dataVolume kafka_volume
+                logfile kafka_logfile 'Kafka log file'
+                configFile kafka_config 'Kafka config file'
+                // FIXME: add keychain etc
+
+                kafkaProcess -> kafka_volume "Хранит данные"
+                kafkaProcess -> kafka_logfile "Пишет логи"
+                kafka_config -> kafkaProcess "Читает конфиг"
+            }
+        }
+
+        kafkaProcess -> zkCluster "Gets quorum and configuration" {
+            style {
+                color primary
+            }
+        }
+    }
+}
+
+deployment {
+    cluster Zookeeper {
+
+        vm vmZk1 {
+            instanceOf zkCluster  {
+                title 'ZK1'
+            }
+        }
+        vm vmZk2 {
+            instanceOf zkCluster  {
+                title 'ZK2'
+            }
+        }
+        vm vmZk3 {
+            instanceOf zkCluster  {
+                title 'ZK3'
+            }
+        }
+
+        vmZk1.zkCluster -[cluster]-> vmZk2.zkCluster
+        vmZk2.zkCluster -[cluster]-> vmZk3.zkCluster
+    }
+
+    cluster Kafka {
+        vm vmKafka1 {
+            instanceOf kafka_broker {
+                title 'Kafka1'
+            }
+        }
+        vm vmKafka2 {
+            instanceOf kafka_broker {
+                title 'Kafka2'
+            }
+        }
+        vm vmKafka3 {
+            instanceOf kafka_broker {
+                title 'Kafka3'
+            }
+        }
+
+        vmKafka1.broker -[cluster]-> vmKafka2.broker
+        vmKafka2.broker -[cluster]-> vmKafka3.broker
+    }
+
+    // cluster 
+
+    // vm kafka1 {}
+    // vm kafka2 {}
+    // vm kafka3 {}
+}
+
+views {
+
+    view kafka_all of kafka_cluster {
+
+        group 'Observability' {
+            opacity 10%
+            
+            include monitoring, centralLogging
+            // FIXME: перекрасить блоки здесь, а не в спеке?
+        }
+
+        include *
+        include kafka_cluster.kafka.*
+        include zkCluster.*
+    }
+
+    view kafka_main extends kafka_all {
+        // autoLayout LeftRight 200 100
+        // include *
+    
+        // include kafka_cluster.kafka.*
+        // include zkCluster.*
+        exclude monitoring, centralLogging
+    }
+
+    view kafka_node of kafka_broker {
+        include kafka ->
+        include *
+        exclude microservice
+    }
+
+    view zk_node of zookeeper_node {
+        include -> zkCluster ->
+
+        include *
+    }
+
+    // deployment view index {
+    //     include Kafka.**
+    //     include Zookeeper.**
+
+    //     // include Zookeeper, Zookeeper.*, Zookeeper.**
+    //     // include vmZk1.*, vmZk2.*, vmZk3.*
+    // }
+}
