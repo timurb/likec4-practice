@@ -1,6 +1,8 @@
 
 views {
     view index {
+        title "Карта ландшафта"
+
         include *
     }
 }    

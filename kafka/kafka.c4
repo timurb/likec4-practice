@@ -99,6 +99,8 @@ deployment {
 views {
 
     view kafka_all of kafka_cluster {
+        title 'Все компоненты Kafka (в т.ч. технические)'
+
 
         group 'Observability' {
             opacity 10%
@@ -113,7 +115,8 @@ views {
     }
 
     view kafka_main extends kafka_all {
-        // autoLayout LeftRight 200 100
+        title 'Все компоненты Kafka (без технических)'
+       // autoLayout LeftRight 200 100
         // include *
 
         // include kafka_cluster.kafka.*
@@ -122,12 +125,16 @@ views {
     }
 
     view kafka_node of kafka_broker {
+        title 'Детализация отдельной ноды Kafka'
+
         include kafka ->
         include *
         exclude microservice
     }
 
     view zk_node of zookeeper_node {
+        title 'Детализация отдельной ноды Zookeeper'
+
         include -> zkCluster ->
 
         include *

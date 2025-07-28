@@ -26,7 +26,9 @@ model {
 }
 
 views {
-    view  {
+    view of monitoring {
+        title "Мониторинг"
+
         include -> monitoring
         include monitoring
         include monitoring.*
