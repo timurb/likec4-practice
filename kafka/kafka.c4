@@ -99,7 +99,7 @@ deployment {
 views {
 
     view kafka_all of kafka_cluster {
-        title 'Все компоненты Kafka (в т.ч. технические)'
+        title '1.1 Все компоненты Kafka (в т.ч. технические)'
 
 
         group 'Observability' {
@@ -115,7 +115,7 @@ views {
     }
 
     view kafka_main extends kafka_all {
-        title 'Все компоненты Kafka (без технических)'
+        title '1.2 Все компоненты Kafka (без технических)'
        // autoLayout LeftRight 200 100
         // include *
 
@@ -125,7 +125,7 @@ views {
     }
 
     view kafka_node of kafka_broker {
-        title 'Детализация отдельной ноды Kafka'
+        title '1.10 Детализация отдельной ноды Kafka'
 
         include kafka ->
         include *
@@ -133,7 +133,7 @@ views {
     }
 
     view zk_node of zookeeper_node {
-        title 'Детализация отдельной ноды Zookeeper'
+        title '1.11 Детализация отдельной ноды Zookeeper'
 
         include -> zkCluster ->
 

@@ -27,7 +27,7 @@ model {
 
 views {
     view of monitoring {
-        title "Мониторинг"
+        title "2.1 Мониторинг"
 
         include -> monitoring
         include monitoring
