@@ -1,8 +1,9 @@
 model {
     extend kafka_cluster {
         metricsExporter kafkaExporter {
-            kafkaProcess -[metrics]-> monitoring.prometheus
-            kafka -[metrics]-> this "Pulls metrics"
+            this -[metrics]-> monitoring
+            kafkaProcess -[metrics]-> this "Pulls metrics"
         }        
     }
 }
+
