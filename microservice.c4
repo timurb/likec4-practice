@@ -1,5 +1,5 @@
 model {
-    system microservice {
+    system microservice "Микросервис XYZ" {
         service consumer {
             this -> kafka_cluster.kafka_broker
         }
@@ -9,6 +9,7 @@ model {
         }
 
         this -[metrics]->monitoring.prometheus
-    }
 
+        endUser -> this
+    }
 }

@@ -1,5 +1,5 @@
 model {
-    system kafka_cluster {
+    system kafka_cluster "Кластер Kafka" {
 
         cluster zkCluster 'Zookeeper Cluster' {
 

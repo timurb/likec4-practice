@@ -1,6 +1,6 @@
 model {
 
-    system centralLogging {
+    system centralLogging "Централизованное логирование" {
         style {
             color secondary    
         }

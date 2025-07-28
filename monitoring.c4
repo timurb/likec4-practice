@@ -1,5 +1,5 @@
 model {
-    system monitoring {
+    system monitoring "Централизованный мониторинг" {
         style {
             color secondary    
         }
